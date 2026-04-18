@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 목록</title>
+</head>
+<body>
+
+<h1>카테고리 목록</h1>
+
+<p style="color:green" th:if="${successMessage}" th:text="${successMessage}"></p>
+<p style="color:red"   th:if="${errorMessage}"   th:text="${errorMessage}"></p>
+
+<a th:href="@{/categories/create}">+ 새 카테고리 등록</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>카테고리명</th>
+        <th>작업</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cat : ${categories}">
+        <td th:text="${cat.id}"></td>
+        <td th:text="${cat.name}"></td>
+        <td>
+            <form th:action="@{/categories/{id}/delete(id=${cat.id})}" method="post"
+                  onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <button type="submit">삭제</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<footer style="margin-top: 40px; padding: 12px; border-top: 1px solid #ccc; font-size: 0.9em; color: #555; text-align: center;">
+    <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss') + ' | 학번: 2171399 |
+  성명: 임재모'}"></p>
+</footer>
+
+</body>
+</html>
