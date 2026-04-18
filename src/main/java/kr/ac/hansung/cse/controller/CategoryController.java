@@ -25,6 +25,12 @@ public class CategoryController {
     }
 
     @GetMapping("/create")
+    public String showCreateCategoryForm(Model model) {
+        model.addAttribute("categoryForm", new CategoryForm());
+        return "categoryForm";
+    }
+
+    @PostMapping("/create")
     public String createCategory(@Valid @ModelAttribute CategoryForm categoryForm, BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -46,7 +52,7 @@ public class CategoryController {
         try {
             categoryService.deleteCategory(id);
             redirectAttributes.addFlashAttribute("successMessage", "삭제 완료");
-        }catch (IllegalArgumentException e) {
+        }catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/categories";
