@@ -38,6 +38,10 @@
         .editing-badge { display: inline-block; background: #e67e22; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; margin-left: 8px; vertical-align: middle; }
     </style>
 </head>
+<footer style="margin-top: 40px; padding: 12px; border-top: 1px solid #ccc; font-size: 0.9em; color: #555; text-align: center;">
+    <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss') + ' | 학번: 2171399 | 성명:
+  임재모'}"></p>
+</footer>
 <body>
 
     <h1>

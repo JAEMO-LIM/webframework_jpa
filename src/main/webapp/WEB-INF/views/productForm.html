@@ -28,6 +28,10 @@
         .required { color: #e74c3c; }
     </style>
 </head>
+<footer style="margin-top: 40px; padding: 12px; border-top: 1px solid #ccc; font-size: 0.9em; color: #555; text-align: center;">
+    <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss') + ' | 학번: 2171399 | 성명:
+  임재모'}"></p>
+</footer>
 <body>
 
     <h1>새 상품 등록</h1>

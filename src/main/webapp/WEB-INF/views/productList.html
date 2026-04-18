@@ -33,6 +33,10 @@
         .empty-msg { text-align: center; padding: 40px; color: #999; font-size: 1.1em; }
     </style>
 </head>
+<footer style="margin-top: 40px; padding: 12px; border-top: 1px solid #ccc; font-size: 0.9em; color: #555; text-align: center;">
+    <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss') + ' | 학번: 2171399 | 성명:
+  임재모'}"></p>
+</footer>
 <body>
 
     <h1>상품 목록</h1>
