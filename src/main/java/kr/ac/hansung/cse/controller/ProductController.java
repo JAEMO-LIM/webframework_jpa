@@ -243,11 +243,18 @@ public class ProductController {
             @RequestParam(required = false) Long categoryId,  // GET ?categoryId=1
             Model model) {
         List<Product> products;
-        if (keyword != null && !keyword.isBlank()) {
+        boolean hasKeyword = keyword != null && !keyword.isBlank();
+        boolean hasCategory = categoryId != null;
+
+        if (hasKeyword && hasCategory) {
+            products = productService.searchByNameAndCategory(keyword, categoryId);
+        } else if (hasKeyword) {
             products = productService.searchByName(keyword);
-        } else if (categoryId != null) {
+        } else if (hasCategory) {
             products = productService.searchByCategory(categoryId);
-        } else { products = productService.getAllProducts(); }
+        } else {
+            products = productService.getAllProducts();
+        }
         model.addAttribute("products", products);
         // 카테고리 드롭다운 목록 + 현재 검색 조건 유지
         model.addAttribute("categories", categoryService.getAllCategories());
