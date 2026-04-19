@@ -57,6 +57,7 @@
         등록된 상품이 없습니다. 새 상품을 등록해 주세요.
     </div>
 
+
     <table th:unless="${#lists.isEmpty(products)}">
         <thead>
             <tr>
@@ -123,6 +124,21 @@
             </tr>
         </tbody>
     </table>
+    <!-- 검색 폼: form method="get" → URL 파라미터로 전송 -->
+    <form th:action="@{/products}" method="get">
+        <!-- th:value로 검색 후에도 입력값이 유지됨 -->
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="상품명 검색"/>
+        <!-- th:each로 카테고리 목록 반복, th:selected로 선택 상태 유지 -->
+        <select name="categoryId">
+            <option value="">-- 전체 카테고리 --</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat.id}" th:text="${cat.name}"
+                    th:selected="${cat.id == categoryId}"></option>
+        </select>  <button type="submit">검색</button>
+    </form>
+
+    <!-- 결과 없음: #lists.isEmpty()로 빈 리스트 감지 -->
+    <p th:if="${#lists.isEmpty(products)}">검색 결과가 없습니다.</p>
 
 </body>
 </html>
