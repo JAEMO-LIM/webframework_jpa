@@ -133,4 +133,14 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.delete(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Product> searchByName(String keyword) {
+        return productRepository.findByNameContaining(keyword);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> searchByCategory(Long categoryId) {
+        return productRepository.findByCategory(categoryId);
+    }
 }
